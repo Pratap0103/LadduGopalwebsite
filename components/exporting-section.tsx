@@ -36,7 +36,7 @@ export default function ExportingSection() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                EXPORTING TO A COUNTRY NEAR YOU
+                DELIVERING WORLDWIDE
               </motion.p>
               <motion.h2
                 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-pretty mb-4"
@@ -44,25 +44,23 @@ export default function ExportingSection() {
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Exporters Extraordinaire
+                Export Excellence
               </motion.h2>
             </motion.div>
             <motion.p
               className="text-sm sm:text-base leading-relaxed opacity-90"
               variants={itemVariants}
             >
-              We are well equipped with advanced milling technologies and a very
-              efficient manufacturing process. This allows us to handle bulk
-              orders with ease. A monthly capacity to manufacture
+              We are equipped with state-of-the-art milling technologies and a highly efficient production process. This enables us to seamlessly handle bulk orders. With a monthly capacity of
               <motion.span
                 className="font-bold"
                 initial={{ color: '#000' }}
                 animate={{ color: '#ff6b35' }}
                 transition={{ duration: 1, repeat: Infinity, repeatType: 'reverse' }}
               >
-                20,000 Metric Tons
+                  30,000 metric tons,
               </motion.span>
-              lets us cater to all your Rice needs.
+              we are prepared to meet all your rice requirements with reliability and consistency.
             </motion.p>
           </motion.div>
 

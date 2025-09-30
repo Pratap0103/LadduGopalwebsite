@@ -61,7 +61,7 @@ export default function PackagingSection() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                CUSTOMISED PACKAGING SOLUTIONS
+                CUSTOMISED PACKAGING MADE FOR YOU
               </motion.p>
               <motion.h2
                 className="font-serif text-3xl md:text-4xl font-bold text-pretty mb-4"
@@ -69,17 +69,14 @@ export default function PackagingSection() {
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Make your brand stand out from the rest
+                Set your brand apart
               </motion.h2>
             </motion.div>
             <motion.p
               className="text-sm leading-relaxed opacity-90"
               variants={itemVariants}
             >
-              We offer a wide array of solutions to provide you with customised
-              packaging solutions that makes your brand stand out of the crowd.
-              From ensuring a market fit to the correct customer satisfaction,
-              our team handles it all.
+              Your brand deserves more than ordinary packaging. We create customised solutions that not only protect your product but also showcase your identity. From concept to delivery, our team ensures designs that resonate with the market and delight your customers—making your brand truly unforgettable.
             </motion.p>
           </motion.div>
         </div>

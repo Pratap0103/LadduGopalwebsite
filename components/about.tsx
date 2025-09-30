@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image"
 import { motion } from 'framer-motion'
 
 export function About() {
@@ -36,26 +35,27 @@ export function About() {
             About us
           </motion.h2>
           <motion.p
-            className="mt-4 md:mt-6 text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed"
+            className="mt-4 md:mt-6 text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed"
             variants={itemVariants}
           >
-            For over 26 years, Laddu Gopal Industries has stood as a trusted name in rice processing and manufacturing,
-            delivering premium-quality rice to domestic and international markets.
+            At Laddu Gopal Industries, we take pride in being one of the leading rice processors and manufacturers in the
+            region from past 25 years, delivering premium quality rice to domestic and international markets.
           </motion.p>
           <motion.p
-            className="mt-3 md:mt-4 text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed"
+            className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed"
             variants={itemVariants}
           >
-            Our state-of-the-art rice mill boasts a production capacity of 44 tons per hour. Using advanced milling,
-            polishing, grading, and sortex technology, we ensure every grain meets the highest benchmarks in purity,
-            taste, and nutrition.
+            Established with a vision to combine tradition with modern technology, our fully equipped rice mill has a
+            production capacity of 44 tons per hour, making us capable of handling large-scale orders with consistency
+            and precision. With advanced milling, polishing, grading, and sortex technology, we ensure every grain meets
+            the highest standards of purity, taste, and nutrition.
           </motion.p>
           <motion.p
-            className="mt-3 md:mt-4 text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed"
+            className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed"
             variants={itemVariants}
           >
-            Driven by a commitment to quality, trust, and customer satisfaction, we foster long-term relationships with
-            farmers, traders, and global buyers alike.
+            Guided by strong values of quality, trust, and customer satisfaction, we continue to build lasting relationships
+            with farmers, traders, and buyers across the globe.
           </motion.p>
         </motion.div>
 
@@ -71,14 +71,10 @@ export function About() {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <Image
+            <img
               src="/images/AboutUs.jpg"
               alt="Laddu Gopal Industries rice processing facility"
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-              className="object-cover object-center transition-transform duration-500 hover:scale-105"
-              quality={100}
-              priority={false}
+              className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
             />
           </motion.div>
         </motion.div>
@@ -86,5 +82,6 @@ export function About() {
     </motion.section>
   );
 }
+
 
 
