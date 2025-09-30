@@ -126,7 +126,7 @@ export function Footer() {
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0" />
                 <p>
-                  Vidisha, Madhya Pradesh<br />
+                  Factory & Regd. Office Address - Khata No. 183/2043, Tahsil - Belpara, Salandi - 767026, Balangir, Odisha<br />
                   India
                 </p>
               </div>
