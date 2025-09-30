@@ -77,6 +77,7 @@ export function About() {
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
               className="object-cover object-center transition-transform duration-500 hover:scale-105"
+              quality={100}
               priority={false}
             />
           </motion.div>
@@ -85,4 +86,5 @@ export function About() {
     </motion.section>
   );
 }
+
 
