@@ -28,6 +28,15 @@ export default function BusinessesSection() {
       viewport={{ once: true }}
     >
       <div className="container mx-auto px-4">
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          Gallery
+        </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <motion.div
             initial={{ x: -100, opacity: 0 }}
@@ -41,7 +50,7 @@ export default function BusinessesSection() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/Home.png"
+                  src="/images/Gallary/1.jpg"
                   alt="Rice Processing"
                   width={400}
                   height={250}
@@ -54,7 +63,7 @@ export default function BusinessesSection() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/rice-1.jpg"
+                  src="/images/Gallary/2.jpg"
                   alt="Quality Rice"
                   width={400}
                   height={250}
@@ -67,7 +76,7 @@ export default function BusinessesSection() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/container-ship.jpg"
+                  src="/images/Gallary/3.jpg"
                   alt="Export Operations"
                   width={400}
                   height={250}
@@ -80,7 +89,7 @@ export default function BusinessesSection() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/rice-packaging.jpg"
+                  src="/images/Gallary/4.jpg"
                   alt="Packaging Solutions"
                   width={400}
                   height={250}
@@ -101,7 +110,7 @@ export default function BusinessesSection() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/LadduGopal.png"
+                  src="/images/Gallary/5.jpg"
                   alt="Laddu Gopal Industries"
                   width={400}
                   height={250}
@@ -114,7 +123,7 @@ export default function BusinessesSection() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/buisiness.png"
+                  src="/images/Gallary/6.jpg"
                   alt="Business Operations"
                   width={400}
                   height={250}
@@ -127,7 +136,7 @@ export default function BusinessesSection() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/exporting.png"
+                  src="/images/Gallary/1.jpg"
                   alt="Export Operations"
                   width={400}
                   height={250}
@@ -140,7 +149,7 @@ export default function BusinessesSection() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/images/packaging.png"
+                  src="/images/Gallary/2.jpg"
                   alt="Packaging Process"
                   width={400}
                   height={250}
@@ -154,3 +163,4 @@ export default function BusinessesSection() {
     </motion.section>
   );
 }
+

@@ -18,7 +18,7 @@ export function QualityStrip() {
       scale: 1, 
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
       }
     },
@@ -72,7 +72,7 @@ export function QualityStrip() {
                 <img
                   src="/images/Logo/LadduGopal.png"
                   alt="Sanjay Grain Products Pvt. Ltd."
-                  className="max-h-full w-auto object-contain filter drop-shadow-lg group-hover:drop-shadow-2xl transition-all duration-500"
+                  className="max-h-full max-w-full w-auto object-contain filter drop-shadow-lg group-hover:drop-shadow-2xl transition-all duration-500"
                   onError={(e) => {
                     console.error('Failed to load LadduGopal.png');
                     e.currentTarget.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100"><text x="50%" y="50%" text-anchor="middle" fill="gray">Laddu Gopal</text></svg>';
@@ -95,7 +95,7 @@ export function QualityStrip() {
                 <img
                   src="/images/Logo/Syamji.png"
                   alt="Sunfire Metal Industries LLP"
-                  className="max-h-full w-auto object-contain filter drop-shadow-lg group-hover:drop-shadow-2xl transition-all duration-500"
+                  className="max-h-full max-w-full w-auto object-contain filter drop-shadow-lg group-hover:drop-shadow-2xl transition-all duration-500 scale-125"
                   onError={(e) => {
                     console.error('Failed to load Syamji.png');
                     e.currentTarget.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100"><text x="50%" y="50%" text-anchor="middle" fill="gray">Syamji</text></svg>';
