@@ -41,7 +41,7 @@ export default function ProcessSection() {
     {
       id: 6,
       title: "Grading & Sorting",
-      image: "/images/Process/Grading & Sorting.png",
+      image: "/images/Process/Grading & Sorting.jpg",
       description: "Final quality control through advanced optical sorting and grading systems. Each grain is meticulously categorized by size, color, and quality to meet our strict standards before packaging."
     }
   ]

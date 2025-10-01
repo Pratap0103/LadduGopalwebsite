@@ -10,7 +10,7 @@ const PRODUCTS = [
     description: "Premium Swarna variety with excellent aroma and taste, processed with advanced parboiling techniques."
   },
   { 
-    name: "Common Parboiled Rice", 
+    name: "Common Parboiled Rice (Mota)", 
     image: "/images/Rice/Common Parboiled rice.jpg",
     description: "High-quality parboiled rice with enhanced nutritional value and extended shelf life."
   },
@@ -30,7 +30,7 @@ const PRODUCTS = [
     description: "Cost-effective broken rice ideal for various culinary applications and food processing."
   },
   { 
-    name: "Puffed Rice", 
+    name: "Puffed Rice (Muri Rice)", 
     image: "/images/Rice/Puffed Rice.jpg",
     description: "Light, crispy puffed rice perfect for snacks, cereals, and traditional preparations."
   },
