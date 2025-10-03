@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { X } from "lucide-react"
-import Image from "next/image"
 
 const PRODUCTS = [
   { 
@@ -82,6 +81,24 @@ export function ProductGrid() {
     whoAreYou: [],
     remarks: ""
   })
+
+  useEffect(() => {
+    if (isFormOpen) {
+      document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.width = '100%'
+    } else {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+    }
+    
+    return () => {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+    }
+  }, [isFormOpen])
 
   const handleProductClick = (productName) => {
     setSelectedProduct(productName)
@@ -208,13 +225,6 @@ export function ProductGrid() {
   return (
     <>
       <style jsx global>{`
-        @supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
-          .backdrop-blur-effect {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-          }
-        }
-        
         .hide-scrollbar {
           scrollbar-width: none;
           -ms-overflow-style: none;
@@ -222,6 +232,45 @@ export function ProductGrid() {
         
         .hide-scrollbar::-webkit-scrollbar {
           display: none;
+        }
+
+        @keyframes slideUp {
+          from {
+            transform: translateY(100%);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .animate-slideUp {
+          animation: slideUp 0.3s ease-out;
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
+
+        @media (min-width: 640px) {
+          .animate-slideUp {
+            animation: fadeIn 0.3s ease-out;
+          }
+        }
+
+        /* Prevent input zoom on iOS */
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+          font-size: 16px !important;
         }
       `}</style>
 
@@ -239,20 +288,11 @@ export function ProductGrid() {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="aspect-[4/3] relative rounded-lg overflow-hidden bg-gray-100 mb-3">
-                <Image
+                <img
                   src={product.image}
                   alt={`${product.name} - High quality rice processing`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-300 hover:scale-105"
-                  quality={70}
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/2wCEAAkGBxISEhISEhIVFhUVFRUVFRUVFRUVFRUWFxUVFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGxAQGi0lICUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAAEAAQMBIgACEQEDEQH/xAAXAAADAQAAAAAAAAAAAAAAAAAABQYC/8QAGxAAAwEBAQEAAAAAAAAAAAAAAQIDABESIUH/xAAWAQEBAQAAAAAAAAAAAAAAAAADAgT/xAAZEQACAwEAAAAAAAAAAAAAAAAAEQEDITH/2gAMAwEAAhEDEQA/AJ9gKpT2y0vUu6y0Q0q0Yq0m9R0m0jQfYl8p7w5Yh5w2m1m0y9kYt3b0b0mQz7v3VgI9cM2V3j1QY0f//Z"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                   loading={idx < 2 ? 'eager' : 'lazy'}
-                  priority={idx < 2}
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
                 />
               </div>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -265,84 +305,98 @@ export function ProductGrid() {
 
       {isFormOpen && (
         <div 
-          className="fixed inset-0 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fadeIn"
           style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)'
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
           }}
           onClick={(e) => {
             if (e.target === e.currentTarget) handleCloseForm()
           }}
         >
           <div 
-            className="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] flex flex-col relative"
+            className="bg-white w-full sm:max-w-lg sm:rounded-2xl rounded-t-3xl shadow-2xl flex flex-col relative animate-slideUp"
             style={{
+              height: '90vh',
+              maxHeight: '90vh',
               background: 'linear-gradient(135deg, #ffffff 0%, #f8faff 100%)'
             }}
+            onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={handleCloseForm}
-              className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transition-colors z-10"
-            >
-              <X size={24} />
-            </button>
+            {/* Header - Fixed */}
+            <div className="flex-shrink-0 bg-white sm:rounded-t-2xl rounded-t-3xl border-b border-gray-100">
+              <button
+                onClick={handleCloseForm}
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 transition-colors p-2 hover:bg-gray-100 rounded-full z-20"
+                type="button"
+              >
+                <X size={20} />
+              </button>
 
-            <div className="px-8 pt-8 pb-4">
-              <h2 className="text-2xl font-bold text-gray-800 text-center mb-1">
-                Send Enquiry
-              </h2>
-              <p className="text-gray-500 text-center text-sm">
-                Answer few questions so that we can help you better
-              </p>
+              <div className="px-5 sm:px-6 pt-5 sm:pt-6 pb-4">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">
+                  Send Enquiry
+                </h2>
+                <p className="text-gray-500 text-xs sm:text-sm">
+                  Fill in the details below to get a quote
+                </p>
+              </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-8 hide-scrollbar">
-              <div className="space-y-6 pb-4">
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto px-5 sm:px-6 py-4 hide-scrollbar">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-2">
-                    Name *
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Name <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-gray-800 bg-white"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-gray-800 bg-white"
                     placeholder="Enter your name"
+                    autoComplete="name"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-2">
-                    Mobile Number *
+                  <label htmlFor="contact" className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Mobile Number <span className="text-red-500">*</span>
                   </label>
-                  <div className="flex items-center border border-gray-200 rounded-xl focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 transition-all bg-white">
-                    <span className="px-3 py-3 text-gray-500 border-r border-gray-200">🇮🇳 +91</span>
+                  <div className="flex items-stretch border border-gray-300 rounded-lg focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-200 transition-all bg-white overflow-hidden">
+                    <span className="px-3 py-2.5 text-gray-600 border-r border-gray-300 bg-gray-50 flex items-center text-sm font-medium">
+                      +91
+                    </span>
                     <input
+                      id="contact"
                       type="tel"
                       name="contact"
                       value={formData.contact}
                       onChange={handleInputChange}
                       maxLength={10}
-                      className="flex-1 px-3 py-3 outline-none text-gray-800 rounded-r-xl"
-                      placeholder="Mobile Number"
+                      pattern="[0-9]*"
+                      inputMode="numeric"
+                      className="flex-1 px-3 py-2.5 outline-none text-gray-800"
+                      placeholder="10 digit mobile number"
+                      autoComplete="tel"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-3">
-                    What are you looking for?
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    What are you looking for? <span className="text-red-500">*</span>
                   </label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="space-y-2">
                     {PRODUCT_OPTIONS.map((product) => (
                       <label
                         key={product}
-                        className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg border cursor-pointer transition-all ${
+                        className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border cursor-pointer transition-all ${
                           formData.lookingFor.includes(product)
-                            ? 'bg-blue-50 border-blue-500 text-blue-700'
-                            : 'bg-white border-gray-200 hover:border-gray-300'
+                            ? 'bg-blue-50 border-blue-400 shadow-sm'
+                            : 'bg-white border-gray-300 hover:border-gray-400 hover:bg-gray-50'
                         }`}
                       >
                         <input
@@ -351,18 +405,11 @@ export function ProductGrid() {
                           value={product}
                           checked={formData.lookingFor.includes(product)}
                           onChange={() => handleProductSelect(product)}
-                          className="hidden"
+                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-200"
                         />
-                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                          formData.lookingFor.includes(product)
-                            ? 'border-blue-500 bg-blue-500'
-                            : 'border-gray-300'
+                        <span className={`text-sm font-medium ${
+                          formData.lookingFor.includes(product) ? 'text-blue-700' : 'text-gray-700'
                         }`}>
-                          {formData.lookingFor.includes(product) && (
-                            <div className="w-2 h-2 bg-white rounded-full" />
-                          )}
-                        </div>
-                        <span className="text-sm leading-tight">
                           {product}
                         </span>
                       </label>
@@ -371,31 +418,32 @@ export function ProductGrid() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-2">
-                    Tell us the required quantity (in kgs)
+                  <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Required Quantity (in kgs) <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="quantity"
                     type="text"
                     name="quantity"
                     value={formData.quantity}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-gray-800 bg-white"
-                    placeholder="Enter quantity"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-gray-800 bg-white"
+                    placeholder="e.g., 100, 500, 1000"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-3">
-                    Who are you?
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Who are you? <span className="text-red-500">*</span>
                   </label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="space-y-2">
                     {WHO_ARE_YOU_OPTIONS.map((option) => (
                       <label
                         key={option}
-                        className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg border cursor-pointer transition-all ${
+                        className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border cursor-pointer transition-all ${
                           formData.whoAreYou.includes(option)
-                            ? 'bg-blue-50 border-blue-500 text-blue-700'
-                            : 'bg-white border-gray-200 hover:border-gray-300'
+                            ? 'bg-blue-50 border-blue-400 shadow-sm'
+                            : 'bg-white border-gray-300 hover:border-gray-400 hover:bg-gray-50'
                         }`}
                       >
                         <input
@@ -404,18 +452,11 @@ export function ProductGrid() {
                           value={option}
                           checked={formData.whoAreYou.includes(option)}
                           onChange={() => handleWhoAreYouSelect(option)}
-                          className="hidden"
+                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-200"
                         />
-                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                          formData.whoAreYou.includes(option)
-                            ? 'border-blue-500 bg-blue-500'
-                            : 'border-gray-300'
+                        <span className={`text-sm font-medium ${
+                          formData.whoAreYou.includes(option) ? 'text-blue-700' : 'text-gray-700'
                         }`}>
-                          {formData.whoAreYou.includes(option) && (
-                            <div className="w-2 h-2 bg-white rounded-full" />
-                          )}
-                        </div>
-                        <span className="text-sm leading-tight">
                           {option}
                         </span>
                       </label>
@@ -424,21 +465,22 @@ export function ProductGrid() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-2">
+                  <label htmlFor="remarks" className="block text-sm font-medium text-gray-700 mb-1.5">
                     Remarks (Optional)
                   </label>
                   <textarea
+                    id="remarks"
                     name="remarks"
                     value={formData.remarks}
                     onChange={handleInputChange}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-gray-800 resize-none bg-white"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-gray-800 resize-none bg-white"
                     placeholder="Any additional information..."
                   />
                 </div>
 
                 {submitStatus.message && (
-                  <div className={`p-4 rounded-xl text-center font-medium ${
+                  <div className={`p-3 rounded-lg text-sm font-medium ${
                     submitStatus.type === "success" 
                       ? "bg-green-50 text-green-700 border border-green-200" 
                       : "bg-red-50 text-red-700 border border-red-200"
@@ -446,16 +488,28 @@ export function ProductGrid() {
                     {submitStatus.message}
                   </div>
                 )}
-              </div>
+              </form>
             </div>
 
-            <div className="px-8 pb-8 pt-4">
+            {/* Footer - Fixed */}
+            <div className="flex-shrink-0 bg-white px-5 sm:px-6 py-4 border-t border-gray-100 sm:rounded-b-2xl">
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3.5 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
+                type="button"
+                className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white py-3 rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
               >
-                {isSubmitting ? "Submitting..." : "Submit"}
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    Submitting...
+                  </span>
+                ) : (
+                  "Submit Enquiry"
+                )}
               </button>
             </div>
           </div>
