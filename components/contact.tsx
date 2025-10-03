@@ -255,50 +255,6 @@ export function Contact() {
               variants={itemVariants}
               whileHover={{ x: 5 }}
             >
-              <motion.div
-                className="p-2 rounded bg-primary/10"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
-              >
-                <MapPin className="h-5 w-5 text-primary" />
-              </motion.div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-foreground mb-3">Follow Us</h3>
-                <div className="flex gap-4 text-sm">
-                  <motion.a
-                    href="#"
-                    className="text-primary hover:text-primary/80 transition-colors"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Facebook className="h-5 w-5" />
-                  </motion.a>
-                  <motion.a
-                    href="#"
-                    className="text-primary hover:text-primary/80 transition-colors"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Twitter className="h-5 w-5" />
-                  </motion.a>
-                  <motion.a
-                    href="#"
-                    className="text-primary hover:text-primary/80 transition-colors"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Instagram className="h-5 w-5" />
-                  </motion.a>
-                  <motion.a
-                    href="#"
-                    className="text-primary hover:text-primary/80 transition-colors"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Linkedin className="h-5 w-5" />
-                  </motion.a>
-                </div>
-              </div>
             </motion.div>
           </motion.div>
 
